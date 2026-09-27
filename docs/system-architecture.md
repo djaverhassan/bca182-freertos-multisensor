@@ -27,3 +27,20 @@ flowchart LR
     MCU --> OLED
     MCU --> BUZ
     MCU --> SERIAL 
+    
+Software Architecture
+
+The firmware separates the application into multiple FreeRTOS tasks rather than processing all behavior in a single loop.
+
+Architectural Design
+
+The design separates responsibilities between tasks:
+
+SensorTask acquires temperature, humidity, and ambient-light information.
+MotionTask monitors PIR activity.
+InputTask processes rotary encoder navigation.
+StateTask controls ACTIVE and INACTIVE system behavior.
+AlarmTask evaluates temperature conditions and controls the buzzer.
+DisplayTask owns the OLED and presents the selected measurement.
+
+FreeRTOS communication mechanisms are used to exchange information between tasks without relying on uncontrolled shared variables.
